@@ -15,15 +15,18 @@ def show_tasks():
     else:
         print("Список задач пуст.")
 
-def delete_task(deleted_task):
+def delete_task():
+    show_tasks()
     if tasks:
-        if deleted_task <= len(tasks):
-            print(f"Задача {tasks[deleted_task - 1]} удалена!")
-            tasks.pop(deleted_task - 1)
-        else:
-            print("Такого индекса в базе ещё нет.")
-    else: 
-        print("В списке нет задач. Удалять нечего.")
+        try:
+            deleted_task = int(input("Введите индекс задачи, которую нужно удалить: "))
+            if 0 < deleted_task <= len(tasks):
+                print(f"Задача {tasks[deleted_task - 1]} удалена!")
+                tasks.pop(deleted_task - 1)
+            else:
+                print("Такого индекса в базе ещё нет.")
+        except ValueError: 
+            print("Пожалуйста, введите числовое значение.")
 
     
 
@@ -41,8 +44,7 @@ def main():
         elif choice == "2":
             show_tasks()
         elif choice == "3":
-            deleted_task = int(input("Введите индекс задачи, которую нужно удалить: "))
-            delete_task(deleted_task)
+            delete_task()
         elif choice == "4":
             break
         else:
